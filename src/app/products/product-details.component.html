@@ -1,0 +1,40 @@
+<div style="background-color:lightblue; padding:10px; margin:10px;">
+    <h2>
+        I am a Child Component [Product Details]. In Blue
+    </h2>
+    <h4>Event Binding Example:</h4>
+    Input value 'Bangles A' hard coded: <input value="Bangles A" />
+
+        <hr/> Input values from component class:<br/><br/> Input:
+        <input [value]="productItem" (input)="productName=$event.target.value">
+        <br> Input 1: <input [value]="productItem" (input)="displayInput_method1($event)" />
+        <br> Input 2: <input [value]="productItem" #myInput (blur)="displayInput_method2(myInput.value)" />
+        <hr/>
+        <br> Button: <button #myButton onclick="alert('tell me why');" (onclick)="InputProductItem_method3=myButton.innerHTML">Click Me</button>
+        <hr/>
+
+    <div>
+        <div>
+            From Input: {{productName}}
+            <br>From Input 1: {{InputProductItem_method1}}
+            <br> From Input 2: {{InputProductItem_method2}}
+            <br> From Button: {{InputProductItem_method3}}
+        </div>
+    </div>
+
+
+
+    <div>
+        <h4>Two Way Binding Example:</h4>
+        <input [value]="productItem" (input)="productItem=$event.target.value"><br/> {{productItem}}
+        <hr/> Simpler way of writing:
+        <input [ngModel]="productItem" (ngModelChange)="displayInput_method4($event)" />
+        <br> From two way binding input: {{productItem}}
+        <hr/> Even Simpler way of writing:
+        <input [(ngModel)]="productItem" />
+        <br> From two way binding input: {{productItem}}
+
+    </div>
+</div>
+
+ 

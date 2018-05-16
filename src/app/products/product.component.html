@@ -1,0 +1,49 @@
+<div  style="background-color:brown; color:#ffffff; padding:10px; font-size:15px;">
+<ng-content></ng-content>
+</div>
+<div style="background-color:lightgreen; padding:10px;">
+    <h2> I am a Parent Component [Product Component]. In Green </h2>
+    <hr/>
+    <div>
+        <h3>Example for Structural Directive. Common Directives are: ngIf, ngFor, ngSwitch</h3>
+        <h4>List of Products</h4>
+        <ul>
+            <li *ngFor="let pItem of products">
+
+                <div [ngSwitch]="pItem.productType">
+                    <span *ngSwitchCase="'Rings'" myHighlight> Ring Product:  {{pItem.productName}} </span>  
+                    
+                    <span *ngSwitchCase="'Jewelry'"> Jewelry Product:  {{pItem.productName | uppercase}} </span>
+                    - Product Price: {{pItem.productPrice | currency: 'USD' }}
+                </div>
+
+
+            </li>
+        </ul>
+    </div>
+    <h3>Example for custom directives with element-selectors</h3>
+    <p>I have been turned blue by a Directive</p>
+    <myP>I have been turned black by a Directive</myP>
+    <h3>Example for custom directives with attribute-selectors</h3>
+    <span myClick>I have been turned white by a Directive</span>
+    <h3>Example for custom directives with host listener click event</h3>
+    <button countClick>Click Me</button>
+ 
+
+    <product-details *ngIf="isActive"></product-details>
+
+    <hr/>
+
+    <product-details-add #myProductDetails [productNameAdd]="myPName" (productPriceAdd)="showPrice($event)"  ></product-details-add>
+
+  The Product Price is:   {{productPrice}}
+  <br/>
+  <h3>Example for accessing child properties and methods using reference variable</h3>
+  Start Number from Child Component: {{myProductDetails.start()}}<br/>
+  Stop Number from Child Component: {{myProductDetails.stop()}}
+  <hr/>
+  
+      <product-details-edit></product-details-edit>
+      <h3>Example for accessing child properties and methods using @ViewChild decorator</h3>
+    {{myProductData}}
+</div>
