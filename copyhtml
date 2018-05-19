@@ -19,6 +19,9 @@
   </table>
   
  
+  <ul *ngFor="let pItem of products">
+    <li>{{pItem.productName}}</li>
+  </ul>
 
 
   <product>
