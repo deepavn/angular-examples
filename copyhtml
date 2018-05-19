@@ -1,0 +1,38 @@
+<div style="text-align:center">
+    <h1>
+      Welcome to {{title}}! for course in {{showcourse().course}}
+    </h1>
+  </div>
+  <h2>This is the launch page </h2>
+  <img src="assets/bangles.jpg" />
+
+
+  <table border="{{tborder}}"   cellpadding="4" width="20%">
+    <tr>
+      <td [align]="myalign" width="{{mywidth}}" class="mybgcolor" >aa</td>
+      <td><input (keyup)="onKey($event)"></td>
+    </tr>
+    <tr>
+      <td><p>{{values}}</p></td>
+      <td>dd </td>
+    </tr>    
+  </table>
+  
+ 
+
+
+  <product>
+  
+  This is from app component using "ng-content" transclusion
+  
+  </product>
+  <app-myc></app-myc>
+
+  <app1></app1>
+  
+  <!-- 
+  <app1a></app1a>
+  -->
+
+  
+
