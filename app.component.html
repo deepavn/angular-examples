@@ -1,0 +1,44 @@
+<div style="text-align:center">
+  <h1>
+    {{title}}!
+  </h1>
+</div>
+<h2>This is the launch page </h2>
+<img src="assets/bangles.jpg" />
+
+<ul *ngFor="let pItem of products">
+  <li>{{pItem.productName}}</li>
+
+</ul>
+
+
+<table border="{{tborder}}" cellpadding="4" width="20%">
+  <tr>
+    <td [align]="myalign" width="{{mywidth}}" class="mybgcolor">aa</td>
+    <td>
+      <input value="Default Value" (mouseover)="onMyOwnKey($event)" (mouseout)="onMou($event)">
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <p>{{values}}</p>
+    </td>
+  </tr>
+</table>
+
+
+
+
+<product>
+
+  This is from app component using "ng-content" transclusion
+
+</product>
+<app-myc></app-myc>
+
+<app1></app1>
+
+<!-- 
+  <app1a></app1a>
+  -->
