@@ -1,0 +1,362 @@
+Setup Angular 6 with a Angular Material Design Bootstrap
+Setup below, includes starting your first Angular Site with a Home Page, About Us Page, Contact Us Page, NavBar (Header) and Footer
+
+-------------------------------------------------------------
+
+install node.js from nodejs.org
+install visual studio code editor
+
+Create a projects folder 
+and using VSCode > in terminal window 
+
+Install Angular CLI
+
+> npm install -g @angular/cli
+
+Create an Angular Project: 
+
+> ng new my-first-angular
+
+We need some front-end styles. So add Angular Bootstrap Material 
+
+> npm i angular-bootstrap-md --save 
+
+Update app.module.ts as shown below:
+
+import { NgModule} from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
+@NgModule({
+    imports: [
+        MDBBootstrapModule.forRoot()
+    ]
+});
+
+
+------
+
+Make sure that styleExt is set to "scss" in angular.json file
+
+Make sure you have src/styles.scss. If you have src/styles.css instead, rename it to .scss
+
+
+install external libs
+
+npm install -–save chart.js@2.5.0 font-awesome hammerjs 
+
+Run server
+
+ng serve --o
+
+------------------------
+
+Start Your First Angular Site
+
+Create a header 
+> ng generate component header
+By running the above command, all the corresponding files are loaded in the respective modules.
+
+Create a footer
+> ng generate component header
+
+
+
+---------------
+
+
+go to app.component.html file and delete everything in it and add the below:
+
+<app-header></app-header>
+<div class="container">
+  <h1>Welcome to Angular Website</h1>
+</div>
+<app-footer></app-footer>
+
+
+
+--------
+
+
+go to header.component.html file (inside the header folder)
+and add the below in it:
+
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+
+  <!-- Navbar brand -->
+  <logo><a class="navbar-brand" href="#">Navbar</a></logo>
+
+  <!-- Collapsible content -->
+  <links>
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+              <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect>Features</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
+          </li>
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown" dropdown>
+              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              Basic dropdown<span class="caret"></span></a>
+              <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+                  <div class="divider dropdown-divider"></div>
+                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+              </div>
+          </li>
+
+      </ul>
+      <!-- Links -->
+
+<!-- Search form -->
+      <form class="form-inline waves-light" mdbWavesEffect>
+          <div class="md-form mt-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          </div>
+      </form>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+
+
+
+Go to footer.component.html file and add the below in it:
+
+<!--Footer-->
+<footer class="page-footer mdb-color text-center text-md-left pt-4 mt-4">
+
+  <!--Footer Links-->
+  <div class="container">
+      <div class="row">
+
+          <!--First column-->
+          <div class="col-md-3 offset-md-1">
+              <h5 class="title">Footer Content </h5>
+              <p>Here you can use rows and columns here to organize your footer content.</p>
+          </div>
+          <!--/.First column-->
+
+          <hr class="hidden-md-up">
+
+          <!--Second column-->
+          <div class="col-md-2 offset-md-1">
+              <h5 class="title">Links</h5>
+              <ul class="list-unstyled">
+                  <li>
+                      <a href="#!">Link 1</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 2</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 3</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 4</a>
+                  </li>
+              </ul>
+          </div>
+          <!--/.Second column-->
+
+          <hr class="hidden-md-up">
+
+          <!--Third column-->
+          <div class="col-md-2">
+              <h5 class="title">Links</h5>
+              <ul class="list-unstyled">
+                  <li>
+                      <a href="#!">Link 1</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 2</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 3</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 4</a>
+                  </li>
+              </ul>
+          </div>
+          <!--/.Third column-->
+
+          <hr class="hidden-md-up">
+
+          <!--Fourth column-->
+          <div class="col-md-2">
+              <h5 class="title">Links</h5>
+              <ul class="list-unstyled">
+                  <li>
+                      <a href="#!">Link 1</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 2</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 3</a>
+                  </li>
+                  <li>
+                      <a href="#!">Link 4</a>
+                  </li>
+              </ul>
+          </div>
+          <!--/.Fourth column-->
+
+      </div>
+  </div>
+  <!--/.Footer Links-->
+
+  <hr>
+
+  <!--Call to action-->
+  <div class="call-to-action text-center py-3">
+      <ul class="list-unstyled list-inline">
+          <li class="list-inline-item">
+              <h5>Register for free</h5>
+          </li>
+          <li class="list-inline-item">
+              <a href="" class="btn btn-danger waves-light btn-rounded" mdbWavesEffect>Sign up!</a>
+          </li>
+      </ul>
+  </div>
+  <!--/.Call to action-->
+
+  <hr>
+
+  <!--Social buttons-->
+  <div class="text-center mb-3">
+
+      <a class="btn-floating btn-small btn-fb waves-light" mdbWavesEffect>
+          <i class="fa fa-facebook"> </i>
+      </a>
+      <a class="btn-floating btn-small btn-tw waves-light" mdbWavesEffect>
+          <i class="fa fa-twitter"> </i>
+      </a>
+      <a class="btn-floating btn-small btn-gplus waves-light" mdbWavesEffect>
+          <i class="fa fa-google-plus"> </i>
+      </a>
+      <a class="btn-floating btn-small btn-li waves-light" mdbWavesEffect>
+          <i class="fa fa-linkedin"> </i>
+      </a>
+      <a class="btn-floating btn-small btn-git waves-light" mdbWavesEffect>
+          <i class="fa fa-github"> </i>
+      </a>
+      <a class="btn-floating btn-small btn-pin waves-light" mdbWavesEffect>
+          <i class="fa fa-pinterest"> </i>
+      </a>
+      <a class="btn-floating btn-small btn-ins waves-light" mdbWavesEffect>
+          <i class="fa fa-instagram"> </i>
+      </a>
+
+  </div>
+  <!--/.Social buttons-->
+
+  <!--Copyright-->
+  <div class="footer-copyright text-center py-3">
+      <div class="container-fluid">
+        © 2018 Copyright: <a href="https://www.teknolearn.com"> Teknolearn Education Services </a>
+
+      </div>
+  </div>
+  <!--/.Copyright-->
+
+</footer>
+<!--/.Footer-->
+
+ --------------------------------------------------------------------------------------------
+ 
+ Lets crreate two new files
+ about
+ contact
+ 
+ ng generate component about 
+ ng generate component contact
+
+
+-----------------------
+
+
+Now lets create LINKS in Angular
+
+First we must create a routing process:
+> ng generate module app-routing --flat --module=app
+
+Update the app-routing.module.ts with this > 
+
+import { NgModule }             from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+@NgModule({
+  exports: [ RouterModule ]
+})
+export class AppRoutingModule {}
+
+Now Lets add the routes:
+Routes tell the router which view to display when a user clicks a link or pastes a URL into the browser address bar.
+
+In the above routing module file add the paths (routes constant) for about page and contact page ---  as  below:
+import { NgModule }             from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent } 
+];
+
+
+@NgModule({
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
+})
+export class AppRoutingModule {}
+
+---------------------------------
+
+Now go to the app.component.html file and add the placeholder for the router... 
+Add the   <router-outlet></router-outlet> as shown below:
+
+<app-header></app-header>
+<div class="container">
+  <h1>Welcome to Angular Website</h1>
+  <router-outlet></router-outlet>
+
+</div>
+<app-footer></app-footer>
+
+------------------------------------------------
+
+Now its time to create links:
+
+Go to the header.component.html page
+
+And update the links.
+
+
+add  routerLink="/"  in <a> element for Home as shown below:
+
+<a class="nav-link waves-light" mdbWavesEffect  routerLink="/" >Home<span class="sr-only">(current)</span></a>
+
+And update two other links (Features, Settings) as below: 
+
+<a class="nav-link waves-light" mdbWavesEffect routerLink="/about">About Us</a>
+<a class="nav-link waves-light" mdbWavesEffect routerLink="/contact">Contact Us</a>
+
+Look in your website for changes. 
+
+
+
