@@ -63,7 +63,7 @@ Create a header
 By running the above command, all the corresponding files are loaded in the respective modules.
 
 Create a footer
-> ng generate component header
+> ng generate component footer
 
 
 
@@ -361,6 +361,23 @@ And update two other links (Features, Settings) as below:
 
 <a class="nav-link waves-light" mdbWavesEffect routerLink="/about">About Us</a>
 <a class="nav-link waves-light" mdbWavesEffect routerLink="/contact">Contact Us</a>
+
+Last Step:
+
+Verify your angular.json file and make sure you have scripts and styles as below:
+
+ "styles": [
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/hammerjs/hammer.min.js"]
+
+
+
 
 Look in your website for changes. 
 
