@@ -17,6 +17,12 @@ Create an Angular Project:
 
 > ng new my-first-angular
 
+CLose the current visual code folder of projects and "open" new folder "my-first-angular" from VS Code
+Your terminal must have the correct path of the new folder....
+-------------
+
+
+
 We need some front-end styles. So add Angular Bootstrap Material 
 
 > npm i angular-bootstrap-md --save 
