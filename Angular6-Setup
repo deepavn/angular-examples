@@ -21,7 +21,7 @@ We need some front-end styles. So add Angular Bootstrap Material
 
 > npm i angular-bootstrap-md --save 
 
-Update app.module.ts as shown below:
+See below code and from below, add the items that are missing in yours (At the right place):
 
 import { NgModule} from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
