@@ -17,7 +17,7 @@ fields created in tables
 every table must have a unique id. Can call it [table-name]_id
 --- for example...you created a 'university' table. Please have a id column called "university_id"
 
------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 
 Create folder in your fav projects folder
 Name the folder "my-first-node-express-mysql"
@@ -39,7 +39,7 @@ Now, we are going to install the required packages to start a localhost which ca
 > npm install cors --save
 > npm install
 
---------------------------
+--------------------------------------------------------------------------------------------------------
 
 A set of folders would have got created in your "my-first-node-express-mysql" folder
 
@@ -101,7 +101,7 @@ We are creating CRUD operations.  CRUD means: Create, Read, Update, and Delete O
 
 Now, you must update the above file correctly replacing the table names, fields etc...with your table names and fields.
 
---------------------------
+--------------------------------------------------------------------------------------------------------
 
 Now go to routes folder
 
@@ -162,7 +162,7 @@ router.put('/:id', function(req, res, next) {
 });  
 module.exports = router;  
 
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 
 Now we have to tell express-node that we are using these
 
@@ -185,7 +185,7 @@ Now do
 
 > npm start
 
--------------------
+--------------------------------------------------------------------------------------------------------
 
 You can access the CRUD links as follows:
 
@@ -196,5 +196,127 @@ http://localhost:3000/Tasks/1	              GET Task with Id = 1
 http://localhost:3000/Tasks/1	              DELETE Task Id = 1
 http://localhost:3000/Tasks	                POST (Post data for insertion in DB)
 http://localhost:3000/Tasks/1	              PUT (Post data, Update record of ID =1  if it exists in DB. Otherwise create it )
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+Keep the above project in express-node, in running mode....
+
+
+Now we go to your fav angular project folder.
+Go to the terminal
+
+
+Lets create service in Angular 6 to access the above restful services
+
+> ng g service app
+
+The above will create "app.service.ts" file
+
+See the file
+
+Delete everything in it, and copy the below:
+
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AppService {
+
+  API_URL = 'http://localhost:3000';
+  constructor(private httpClient: HttpClient) { 
+
+  }
+  getData() {
+    return this.httpClient.get(`${this.API_URL}/Tasks`);
+  }
+}
+
+-----------------------------------------------------------------------------------
+
+
+Please see above code, how we are now calling the express-node restful services for CRUD to insert, display our data in it! 
+
+------------------
+
+Now, lets create component.
+
+> ng g component my-data
+
+We are now going to access the service we created above in this component...
+
+Go to my-data.component.ts file and add this...
+
+import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
+
+@Component({
+  selector: 'app-my-data',
+  templateUrl: './my-data.component.html',
+  styleUrls: ['./my-data.component.css']
+})
+export class MyDataComponent implements OnInit {
+  private mydata: Array<object> = [];
+  constructor(private appService: AppService) { }
+
+  ngOnInit() {
+    this.appService.getData().subscribe((data: Array<object>) => {
+      this.mydata = data;
+      console.log(data);
+    });
+  }
+
+}
+
+
+
+And go to my-data.component.htmlfile and add this 
+
+<ul *ngFor="let item of mydata">
+  <li> {{ item.product_id }} </li>
+  <li> {{ item.product_name }} </li>
+  <li> ${{ item.product_price }} </li>
+ <hr/>
+</ul>
+
+Replace the product_id, product_name etc with your field names of your associated table
+
+-------------------------
+
+
+Now routing...
+
+
+Go to app-routing.module.ts and add the below in the appropriates places
+
+import {MyDataComponent} from './my-data/my-data.component'
+
+.....
+.....
+.....
+
+const routes: Routes = [
+...
+...
+{ path: 'mydata', component: MyDataComponent }  
+  
+  
+  
+-------------------------------------------------------
+  
+  
+  ALL DONE FOLKS
+  
+ > ng serve -o
+ 
+ And try localhost:
+ 
+ http://localhost:4200/mydata
+ 
+ 
 
 
