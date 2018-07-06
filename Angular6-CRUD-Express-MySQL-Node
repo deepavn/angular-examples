@@ -1,0 +1,200 @@
+Purpose of the Project.
+We are going to create RESTFUL Services for CRUD operations using MYSQL, EXPRESS, NODE.JS
+And
+We will use these RESTFUL SERVICES URL, as links in ANGULAR 6, so we can grab the required CRUD info from Angular
+
+
+Pre-Requisites:
+
+Make sure of the following before we begin:
+
+mysql is installed
+mysql user instance created. In our example, we used: User: MySQLUSer, Password: MySQLUser2018!
+database created. In our example it is: nicdb
+tables created
+fields created in tables
+- atleast 3 rows of data created in each table
+every table must have a unique id. Can call it [table-name]_id
+--- for example...you created a 'university' table. Please have a id column called "university_id"
+
+-----------------------------------------------------------------
+
+Create folder in your fav projects folder
+Name the folder "my-first-node-express-mysql"
+In the folder, create package.json file. Can leave it empty
+
+Now, 
+
+Go to VS Code
+Open the above folder
+
+Go to VS terminal
+
+Now, we are going to install the required packages to start a localhost which can talk to databases
+(The default localhost used by express is 3000)
+
+> npm install express-generator -g 
+> express
+> npm install mysql --save
+> npm install cors --save
+> npm install
+
+--------------------------
+
+A set of folders would have got created in your "my-first-node-express-mysql" folder
+
+Lets create a connection MYSQL now...
+
+create a file called 'dbconnection.js"
+
+Copy the below:
+
+
+var mysql = require('mysql');  
+var connection = mysql.createPool({  
+    host: 'localhost',  
+    user: 'MySQLUser',  
+    password: 'MySQLUser2018!',  
+    database: 'mynicdb'  
+});  
+module.exports = connection;  
+
+
+
+In the above code, please change the values according to your settings. 
+
+Do you have a folder called "models" in your project ?
+If not, please create it. 
+
+And in that create a file called "Task.js" 
+
+Put the below code:
+
+// **************************************************
+
+var db = require('../dbconnection'); //reference of dbconnection.js  
+var Task = {  
+    getAllTasks: function(callback) {  
+        return db.query("Select * from products", callback);  
+    },  
+    getTaskById: function(id, callback) {  
+        return db.query("select * from products where product_id=?", [id], callback);  
+    },  
+    addTask: function(Task, callback) {  
+       // return db.query("Insert into products values(?,?,?)", [Product.id, Product.product_name, Product.product_price], callback);  
+        return db.query("Insert into products values(?,?,?)", [1, "Pen", 200], callback);  
+    },  
+    deleteTask: function(id, callback) {  
+        return db.query("delete from task where Id=?", [id], callback);  
+    },  
+    updateTask: function(id, Task, callback) {  
+        return db.query("update task set Title=?,Status=? where Id=?", [Task.Title, Task.Status, id], callback);  
+    }  
+};  
+module.exports = Task;  
+
+// **************************************************
+
+
+Please note, above, what we are doing. 
+We are creating CRUD operations.  CRUD means: Create, Read, Update, and Delete Operations.
+
+Now, you must update the above file correctly replacing the table names, fields etc...with your table names and fields.
+
+--------------------------
+
+Now go to routes folder
+
+Create a file called "Tasks.js"
+
+We are now going to tell the host-server to route pages accordingly for all CRUD operations
+
+// ************** in TASKS.JS File 
+
+var express = require('express');  
+var router = express.Router();  
+var Task = require('../models/Task');  
+router.get('/:id?', function(req, res, next) {  
+    if (req.params.id) {  
+        Task.getTaskById(req.params.id, function(err, rows) {  
+            if (err) {  
+                res.json(err);  
+            } else {  
+                res.json(rows);  
+            }  
+        });  
+    } else {  
+        Task.getAllTasks(function(err, rows) {  
+            if (err) {  
+                res.json(err);  
+            } else {  
+                res.json(rows);  
+            }  
+        });  
+    }  
+});  
+router.post('/', function(req, res, next) {  
+    Task.addTask(req.body, function(err, count) {  
+        if (err) {  
+            res.json(err);  
+        } else {  
+            res.json(req.body); //or return count for 1 & 0  
+        }  
+    });  
+});  
+router.delete('/:id', function(req, res, next) {  
+    Task.deleteTask(req.params.id, function(err, count) {  
+        if (err) {  
+            res.json(err);  
+        } else {  
+            res.json(count);  
+        }  
+    });  
+});  
+router.put('/:id', function(req, res, next) {  
+    Task.updateTask(req.params.id, req.body, function(err, rows) {  
+        if (err) {  
+            res.json(err);  
+        } else {  
+            res.json(rows);  
+        }  
+    });  
+});  
+module.exports = router;  
+
+----------------------------------------------------------------------------------
+
+Now we have to tell express-node that we are using these
+
+
+So go to app.js file
+and add the below 4 lines, below the "var app = express();" line
+
+
+/* *********** New Variables  ************* */
+
+var cors=require('cors');
+var Tasks=require('./routes/Tasks');
+app.use(cors());
+app.use('/Tasks',Tasks);
+
+/* ******************************************/
+
+Thats it...
+Now do 
+
+> npm start
+
+-------------------
+
+You can access the CRUD links as follows:
+
+Path	Request Type
+
+http://localhost:3000/Tasks	                GET All Tasks
+http://localhost:3000/Tasks/1	              GET Task with Id = 1
+http://localhost:3000/Tasks/1	              DELETE Task Id = 1
+http://localhost:3000/Tasks	                POST (Post data for insertion in DB)
+http://localhost:3000/Tasks/1	              PUT (Post data, Update record of ID =1  if it exists in DB. Otherwise create it )
+
+
